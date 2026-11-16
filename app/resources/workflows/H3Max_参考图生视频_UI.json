@@ -1,0 +1,559 @@
+{
+ "last_node_id": 10,
+ "last_link_id": 9,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    20,
+    20
+   ],
+   "size": [
+    320,
+    360
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "请替换_人物.png",
+    "image"
+   ]
+  },
+  {
+   "id": 2,
+   "type": "LoadImage",
+   "pos": [
+    20,
+    420
+   ],
+   "size": [
+    320,
+    360
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      2
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "请替换_场景.png",
+    "image"
+   ]
+  },
+  {
+   "id": 3,
+   "type": "LoadImage",
+   "pos": [
+    20,
+    820
+   ],
+   "size": [
+    320,
+    360
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      3
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "请替换_动作.png",
+    "image"
+   ]
+  },
+  {
+   "id": 4,
+   "type": "StringConcatenate",
+   "pos": [
+    380,
+    20
+   ],
+   "size": [
+    420,
+    200
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [
+      4
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "StringConcatenate"
+   },
+   "widgets_values": [
+    "雨夜霓虹街道，地面积水反光",
+    "银发少女，黑色改良旗袍，冷静神情",
+    "，"
+   ],
+   "title": "① 场景 + 人物",
+   "color": "#2b4a6f",
+   "bgcolor": "#1b2c40"
+  },
+  {
+   "id": 5,
+   "type": "StringConcatenate",
+   "pos": [
+    380,
+    250
+   ],
+   "size": [
+    420,
+    200
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "string_a",
+     "type": "STRING",
+     "widget": {
+      "name": "string_a"
+     },
+     "link": 4
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [
+      5
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "StringConcatenate"
+   },
+   "widgets_values": [
+    "雨夜霓虹街道，地面积水反光",
+    "缓缓转身看向镜头",
+    "，"
+   ],
+   "title": "② ＋ 动作",
+   "color": "#2b4a6f",
+   "bgcolor": "#1b2c40"
+  },
+  {
+   "id": 6,
+   "type": "StringConcatenate",
+   "pos": [
+    380,
+    480
+   ],
+   "size": [
+    420,
+    200
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "string_a",
+     "type": "STRING",
+     "widget": {
+      "name": "string_a"
+     },
+     "link": 5
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [
+      6
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "StringConcatenate"
+   },
+   "widgets_values": [
+    "雨夜霓虹街道，地面积水反光",
+    "缓慢推近（dolly in），焦距 50mm",
+    "，"
+   ],
+   "title": "③ ＋ 镜头",
+   "color": "#2b4a6f",
+   "bgcolor": "#1b2c40"
+  },
+  {
+   "id": 7,
+   "type": "StringConcatenate",
+   "pos": [
+    380,
+    710
+   ],
+   "size": [
+    420,
+    200
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "string_a",
+     "type": "STRING",
+     "widget": {
+      "name": "string_a"
+     },
+     "link": 6
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [
+      7
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "StringConcatenate"
+   },
+   "widgets_values": [
+    "雨夜霓虹街道，地面积水反光",
+    "侧逆光，轮廓光勾边，背景压暗",
+    "，"
+   ],
+   "title": "④ ＋ 光线",
+   "color": "#2b4a6f",
+   "bgcolor": "#1b2c40"
+  },
+  {
+   "id": 8,
+   "type": "MiniMax H3 Content Builder",
+   "pos": [
+    860,
+    20
+   ],
+   "size": [
+    480,
+    640
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image_1",
+     "type": "IMAGE",
+     "link": 1
+    },
+    {
+     "name": "image_2",
+     "type": "IMAGE",
+     "link": 2
+    },
+    {
+     "name": "image_3",
+     "type": "IMAGE",
+     "link": 3
+    },
+    {
+     "name": "prompt",
+     "type": "STRING",
+     "widget": {
+      "name": "prompt"
+     },
+     "link": 7
+    }
+   ],
+   "outputs": [
+    {
+     "name": "content",
+     "type": "MINIMAX_H3_CONTENT",
+     "links": [
+      8
+     ],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMax H3 Content Builder"
+   },
+   "widgets_values": [
+    "参考图 1 是人物定妆，参考图 2 是场景，参考图 3 是动作/白膜；保持人物与场景一致。"
+   ],
+   "title": "内容组装：提示词 + 3 张参考图",
+   "color": "#3d6b3d",
+   "bgcolor": "#1f3320"
+  },
+  {
+   "id": 9,
+   "type": "MiniMax H3 Max Generate Video",
+   "pos": [
+    1390,
+    20
+   ],
+   "size": [
+    400,
+    420
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "content",
+     "type": "MINIMAX_H3_CONTENT",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "video_url",
+     "type": "STRING",
+     "links": [
+      9
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "task_id",
+     "type": "STRING",
+     "links": null,
+     "slot_index": 1
+    },
+    {
+     "name": "status",
+     "type": "STRING",
+     "links": null,
+     "slot_index": 2
+    },
+    {
+     "name": "task_json",
+     "type": "STRING",
+     "links": null,
+     "slot_index": 3
+    },
+    {
+     "name": "request_json",
+     "type": "STRING",
+     "links": null,
+     "slot_index": 4
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MiniMax H3 Max Generate Video"
+   },
+   "widgets_values": [
+    "768P",
+    "10",
+    "16:9",
+    "quality",
+    0
+   ],
+   "title": "H3 Max · 768P · 10s",
+   "color": "#8a5a1f",
+   "bgcolor": "#3a2a12"
+  },
+  {
+   "id": 10,
+   "type": "MiniMax H3 Preview Video",
+   "pos": [
+    1840,
+    20
+   ],
+   "size": [
+    440,
+    420
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "video_url",
+     "type": "STRING",
+     "link": 9
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "MiniMax H3 Preview Video"
+   },
+   "widgets_values": [],
+   "title": "预览 / 保存成片"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   8,
+   0,
+   "IMAGE"
+  ],
+  [
+   2,
+   2,
+   0,
+   8,
+   1,
+   "IMAGE"
+  ],
+  [
+   3,
+   3,
+   0,
+   8,
+   2,
+   "IMAGE"
+  ],
+  [
+   4,
+   4,
+   0,
+   5,
+   0,
+   "STRING"
+  ],
+  [
+   5,
+   5,
+   0,
+   6,
+   0,
+   "STRING"
+  ],
+  [
+   6,
+   6,
+   0,
+   7,
+   0,
+   "STRING"
+  ],
+  [
+   7,
+   7,
+   0,
+   8,
+   3,
+   "STRING"
+  ],
+  [
+   8,
+   8,
+   0,
+   9,
+   0,
+   "MINIMAX_H3_CONTENT"
+  ],
+  [
+   9,
+   9,
+   0,
+   10,
+   0,
+   "STRING"
+  ]
+ ],
+ "groups": [
+  {
+   "title": "① 替换这 3 张参考图",
+   "bounding": [
+    0,
+    30,
+    360,
+    1230
+   ],
+   "color": "#3f5f8f",
+   "font_size": 30,
+   "flags": {}
+  },
+  {
+   "title": "② 改这里的 5 段文字",
+   "bounding": [
+    365,
+    30,
+    455,
+    970
+   ],
+   "color": "#3f5f8f",
+   "font_size": 30,
+   "flags": {}
+  },
+  {
+   "title": "③ 运行出片（768P / 10s）",
+   "bounding": [
+    845,
+    30,
+    1450,
+    670
+   ],
+   "color": "#3f5f8f",
+   "font_size": 30,
+   "flags": {}
+  }
+ ],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.72,
+   "offset": [
+    80,
+    -60
+   ]
+  }
+ },
+ "version": 0.4
+}

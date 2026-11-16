@@ -1,0 +1,6 @@
+# 负面 / Negative（H3 用 prompt_expansion_mode 控制，这里做人读参考）
+多余手指，肢体扭曲
+画面抖动，糊成一片
+文字水印，logo
+过曝，死黑
+塑料感皮肤

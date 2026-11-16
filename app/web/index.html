@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>挑染AI工作台</title>
+<link rel="stylesheet" href="style.css?v=12" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> 挑染AI工作台</div>
+  <div class="modes">
+    <button class="mode active" data-mode="image">图片提示词</button>
+    <button class="mode" data-mode="video">视频提示词</button>
+  </div>
+  <div class="status">
+    <select id="projectSel"></select>
+    <button id="newProject" class="ghost small">+ 项目</button>
+    <span id="comfyDot" class="pill off">ComfyUI 离线</span>
+    <span id="llmDot" class="pill off">AI 关闭</span>
+  </div>
+</header>
+
+<!-- ============ 图片提示词（复刻原项目流程） ============ -->
+<section id="viewImage" class="imgview">
+  <div class="pick-strip">
+    <div class="strip-head">
+      <span>图库</span>
+      <input id="imgFilter" placeholder="筛选…" />
+      <button id="pickDir" class="ghost small">📁 选择文件夹</button>
+      <span id="galleryPath" class="gallery-path" title="当前图库目录"></span>
+      <label class="chk"><input type="checkbox" id="recursive" /> 含子目录</label>
+      <span class="hint-inline">单击=设为底图 · Shift+单击=加参考图 · 悬停 × 可删</span>
+    </div>
+    <div id="images" class="thumbs-row"></div>
+  </div>
+
+  <div class="img-main">
+    <div class="steps">
+      <div class="step" data-step="1">
+        <div class="step-head"><b>① 底图分析</b><span class="st" id="st1">待开始</span></div>
+        <div class="analyzed" id="analyzed"></div>
+        <div class="step-body">
+          <div class="base-row">
+            <div id="baseThumb" class="pick">选一张底图</div>
+            <button id="analyzeBase" class="primary small">开始分析</button>
+          </div>
+          <div id="analysisOut" class="kv"></div>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-head"><b>② 参考图拆解</b><span class="st" id="st2">可选</span></div>
+        <div class="step-body">
+          <div id="refThumbs" class="ref-row"><span class="muted">Shift+单击图库图片，最多 3 张</span></div>
+          <button id="decomposeBtn" class="ghost small">拆解参考图</button>
+          <div id="decompOut" class="decomp"></div>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-head"><b>③ 方向建议</b><span class="st" id="st3">待生成</span></div>
+        <div class="step-body">
+          <div class="row tight">
+            <select id="imgWorkflow">
+              <option value="retouch">线路：原图精修</option>
+              <option value="product">线路：产品精修</option>
+              <option value="character">线路：角色设定</option>
+              <option value="cosplay">线路：Cosplay 后期</option>
+            </select>
+          </div>
+          <textarea id="requirement" rows="2" placeholder="需求：例如做成杂志封面感，皮肤更干净，保留原有表情"></textarea>
+          <button id="dirBtn" class="ghost small">生成 3 个方向</button>
+          <div id="dirs" class="dirs"></div>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-head"><b>④ 细化</b><span class="st" id="st4">待填写</span></div>
+        <div class="step-body">
+          <div class="row tight">
+            <select id="purpose">
+              <option>用途：电商主图</option><option>用途：社交平台</option>
+              <option>用途：印刷物料</option><option>用途：角色设定</option>
+            </select>
+            <select id="spec">
+              <option value="16:9">规格：16:9</option><option value="3:4">规格：3:4</option>
+              <option value="1:1">规格：1:1</option><option value="9:16">规格：9:16</option>
+            </select>
+          </div>
+          <textarea id="constraint" rows="2" placeholder="约束：只能改背景与光线，人物脸型不变"></textarea>
+        </div>
+      </div>
+
+      <div class="step" data-step="5">
+        <div class="step-head"><b>⑤ 生成提示词</b><span class="st" id="st5">待生成</span></div>
+        <div class="step-body">
+          <button id="genImgPrompt" class="primary">生成图片提示词</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="result">
+      <div class="res-head">输出 <span class="tip">交给 MJ 手动出图</span></div>
+      <label class="res-label">中文提示词（给修图师）</label>
+      <textarea id="zhOut" rows="5" placeholder="第 ⑤ 步生成后出现"></textarea>
+      <label class="res-label">MJ 英文提示词</label>
+      <textarea id="enOut" rows="5" placeholder="英文正文"></textarea>
+      <div id="paramsOut" class="params"></div>
+      <label class="res-label">提交前检查</label>
+      <ul id="checklist" class="checklist"></ul>
+      <label class="res-label">优化要求（可先写要求再优化）</label>
+      <textarea id="optReq" rows="2" placeholder="例如：背景换纯黑、加强水珠质感、更电影感、压暗高光…"></textarea>
+      <div class="res-actions">
+        <button id="optBtn" class="primary small">AI 优化提示词</button>
+        <button id="optUndo" class="ghost small" style="display:none">撤销</button>
+      </div>
+      <div class="res-actions">
+        <button id="copyZh" class="ghost small">复制中文</button>
+        <button id="copyEn" class="ghost small">复制 MJ</button>
+        <button id="openMJ2" class="primary small">打开 MJ ↗</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 视频提示词 ============ -->
+<section id="viewVideo" class="layout" style="display:none">
+  <aside class="panel gallery">
+    <div class="panel-head"><h2>图库</h2><input id="imgFilter2" placeholder="筛选…" /></div>
+    <div id="images2" class="thumbs"></div>
+    <div class="hint">单击 → 填入参考图槽<br/>双击 → 直接分析</div>
+  </aside>
+
+  <section class="panel compiler">
+    <div class="panel-head">
+      <h2>视频提示词</h2>
+      <button id="wfBtn" class="ghost small" title="从 GitHub 拉取最新的 ComfyUI 工作流">↓ 更新工作流</button>
+      <button id="analyzeBtn" class="ghost small">✦ 分析参考图 1</button>
+    </div>
+    <div class="vmode-bar" id="vmodeBar">
+      <button data-vmode="camera" class="vmode active">🎥 运镜 10s</button>
+      <button data-vmode="live2d" class="vmode">🫧 Live2D 5s 微动</button>
+      <button data-vmode="all" class="vmode">全部</button>
+      <label class="chk" id="loopWrap" style="display:none"><input type="checkbox" id="loopChk" /> 首尾同帧循环</label>
+    </div>
+    <div class="preset-bar" id="presetBar"></div>
+    <div class="preset-desc" id="presetDesc"></div>
+    <div class="cats">
+      <div class="cat-tabs" id="catTabs"></div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="fields">
+      <label>主体 <textarea id="f_subject" rows="2" placeholder="银发少女，黑色改良旗袍"></textarea></label>
+      <label>动作 <textarea id="f_action" rows="2" placeholder="缓缓转身看向镜头"></textarea></label>
+      <label>场景 <textarea id="f_scene" rows="2" placeholder="雨夜霓虹街道"></textarea></label>
+      <label>镜头 <textarea id="f_camera" rows="2" placeholder="缓慢推近，50mm"></textarea></label>
+      <label>光线 <textarea id="f_light" rows="2" placeholder="侧逆光，轮廓光勾边"></textarea></label>
+      <label>风格 <textarea id="f_style" rows="2" placeholder="电影感，柯达 5219"></textarea></label>
+    </div>
+    <div class="row actions">
+      <button id="ruleBtn" class="ghost small">视频词（规则）</button>
+      <button id="llmBtn" class="primary small">视频词（AI 生成）</button>
+    </div>
+    <div class="refine-box">
+      <textarea id="optReqVideo" rows="2" placeholder="优化要求：例如动作再快一点、加雨、突出衣摆飘动、镜头更压迫…"></textarea>
+      <div class="refine-actions">
+        <button id="refineBtn" class="primary small">按要求优化</button>
+        <button id="videoUndo" class="ghost small" style="display:none">撤销</button>
+      </div>
+    </div>
+    <div class="output">
+      <div class="out-head">
+        <span>视频提示词</span>
+        <div><button id="copyVideo" class="ghost small">复制</button></div>
+      </div>
+      <textarea id="videoOut" rows="3" placeholder="出片实际使用这句"></textarea>
+      <div class="params" id="mjParams"></div>
+    </div>
+  </section>
+
+  <section class="panel video">
+    <div class="panel-head"><h2>出片</h2><span class="tip">H3 Max · 768P</span></div>
+    <div class="slots">
+      <div class="slot" data-slot="0"><span>参考图 1</span><em>主体</em></div>
+      <div class="slot" data-slot="1"><span>参考图 2</span><em>场景</em></div>
+      <div class="slot" data-slot="2"><span>参考图 3</span><em>动作</em></div>
+    </div>
+    <label class="inline">时长
+      <select id="duration"><option>5</option><option>6</option><option>8</option><option selected>10</option><option>12</option><option>15</option></select>
+      <span class="unit">秒</span>
+    </label>
+    <button id="genVideo" class="primary wide">生成视频</button>
+    <button id="archiveBtn" class="ghost small wide" style="margin-top:0">归档到项目</button>
+    <div class="progress"><div id="bar"></div></div>
+    <div id="vstate" class="vstate">待提交</div>
+    <video id="player" controls playsinline></video>
+    <div id="cost" class="cost"></div>
+  </section>
+</section>
+
+
+<div id="modal" class="modal-mask" style="display:none">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">新建项目</div>
+    <input id="modalInput" placeholder="项目名（会自动加日期前缀）" />
+    <div class="modal-actions">
+      <button id="modalCancel" class="ghost small">取消</button>
+      <button id="modalOk" class="primary small">确定</button>
+    </div>
+  </div>
+</div>
+<script src="app.js?v=17"></script>
+</body>
+</html>

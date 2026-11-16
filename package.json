@@ -1,0 +1,48 @@
+{
+  "name": "tiaoran-workbench",
+  "productName": "挑染AI工作台",
+  "version": "1.0.0",
+  "description": "Desktop workbench for AI image/video prompt engineering and MiniMax H3 video generation via ComfyUI",
+  "main": "app/main.js",
+  "author": "Tiaoran",
+  "license": "MIT",
+  "keywords": [
+    "comfyui",
+    "minimax",
+    "hailuo",
+    "prompt",
+    "electron",
+    "midjourney",
+    "video-generation"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build:win": "electron-builder --win portable",
+    "build:dir": "electron-builder --dir"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.tiaoran.workbench",
+    "productName": "挑染AI工作台",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "app/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "app/assets/icon.ico",
+      "target": [
+        "portable"
+      ]
+    },
+    "portable": {
+      "artifactName": "TiaoranWorkbench-${version}.exe"
+    }
+  }
+}

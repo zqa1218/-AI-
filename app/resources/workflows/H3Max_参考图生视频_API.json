@@ -1,0 +1,105 @@
+{
+ "1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "请替换_人物.png"
+  }
+ },
+ "2": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "请替换_场景.png"
+  }
+ },
+ "3": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "请替换_动作.png"
+  }
+ },
+ "4": {
+  "class_type": "StringConcatenate",
+  "inputs": {
+   "string_a": "雨夜霓虹街道，地面积水反光",
+   "string_b": "银发少女，黑色改良旗袍，冷静神情",
+   "delimiter": "，"
+  }
+ },
+ "5": {
+  "class_type": "StringConcatenate",
+  "inputs": {
+   "string_a": [
+    "4",
+    0
+   ],
+   "string_b": "缓缓转身看向镜头",
+   "delimiter": "，"
+  }
+ },
+ "6": {
+  "class_type": "StringConcatenate",
+  "inputs": {
+   "string_a": [
+    "5",
+    0
+   ],
+   "string_b": "缓慢推近（dolly in），焦距 50mm",
+   "delimiter": "，"
+  }
+ },
+ "7": {
+  "class_type": "StringConcatenate",
+  "inputs": {
+   "string_a": [
+    "6",
+    0
+   ],
+   "string_b": "侧逆光，轮廓光勾边，背景压暗",
+   "delimiter": "，"
+  }
+ },
+ "8": {
+  "class_type": "MiniMax H3 Content Builder",
+  "inputs": {
+   "prompt": [
+    "7",
+    0
+   ],
+   "image_1": [
+    "1",
+    0
+   ],
+   "image_2": [
+    "2",
+    0
+   ],
+   "image_3": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "MiniMax H3 Max Generate Video",
+  "inputs": {
+   "content": [
+    "8",
+    0
+   ],
+   "resolution": "768P",
+   "duration": "10",
+   "ratio": "16:9",
+   "prompt_expansion_mode": "quality",
+   "seed": 0
+  }
+ },
+ "10": {
+  "class_type": "MiniMax H3 Preview Video",
+  "inputs": {
+   "video_url": [
+    "9",
+    0
+   ]
+  }
+ }
+}
