@@ -1,0 +1,2 @@
+# -AI-
+short-video-workspace
