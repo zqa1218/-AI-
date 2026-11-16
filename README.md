@@ -5,6 +5,10 @@
 
 > Desktop workbench for AI prompt engineering and MiniMax H3 video generation through ComfyUI.
 
+[![release](https://img.shields.io/github/v/release/zqa1218/-AI-?label=download&color=4cc9f0)](https://github.com/zqa1218/-AI-/releases/latest)
+
+**直接下载：[TiaoranWorkbench-1.0.0.exe](https://github.com/zqa1218/-AI-/releases/download/v1.0.0/TiaoranWorkbench-1.0.0.exe)**（约 71 MB，免安装单文件）
+
 ---
 
 ## 功能
@@ -51,6 +55,16 @@
 
 ## 快速开始
 
+### 方式一：下载 exe（推荐）
+
+1. 下载 [TiaoranWorkbench-1.0.0.exe](https://github.com/zqa1218/-AI-/releases/download/v1.0.0/TiaoranWorkbench-1.0.0.exe)
+2. 双击运行（首次启动会在「文档/TiaoranAI」建好数据目录）
+3. 界面右上「↓ 更新工作流」会从本仓库拉取最新 ComfyUI 工作流
+
+> 若 Windows 提示未知发布者，请选择「更多信息 → 仍要运行」（未做代码签名）。
+
+### 方式二：源码运行
+
 ```bash
 git clone <your-repo-url>
 cd tiaoran-workbench
@@ -61,6 +75,17 @@ npm start
 或下载 Release 中的 `TiaoranWorkbench-*.exe` 直接运行。
 
 首次启动会自动在 **「文档/TiaoranAI」** 创建数据目录并铺好内置预设、词库与工作流模板。
+
+### 工作流自动更新
+
+界面右上「↓ 更新工作流」→ 从本仓库 `app/resources/workflows/` 拉取 JSON，
+写入 `<数据目录>/项目组/_模板/02_工作流` 与 `<数据目录>/工作流`。
+
+想换源（自己的 fork 或分支）：
+
+```bash
+set TIAORAN_WF_BASE=https://raw.githubusercontent.com/<owner>/<repo>/main/app/resources/workflows/
+```
 
 ---
 

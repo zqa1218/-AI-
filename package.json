@@ -39,7 +39,8 @@
       "icon": "app/assets/icon.ico",
       "target": [
         "portable"
-      ]
+      ],
+      "signAndEditExecutable": false
     },
     "portable": {
       "artifactName": "TiaoranWorkbench-${version}.exe"
